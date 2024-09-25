@@ -13,10 +13,10 @@
 class Point3D
 {
 public:
-	Point3D(double _x, double _y, double _z) : x{ _x }, y{ _y }, z{_z} {}
+	Point3D(double _x, double _y, double _z) : x{ _x }, y{ _y }, z{ _z } {};
 	void print() {
 		std::cout << "x = " << x << " y = " << y << " z = " << z << "\n";
-	}
+	};
 private:
 	double x;
 	double y;
@@ -26,8 +26,8 @@ private:
 class Curves
 {
 public:
-	Curves() 
-	{ }
+	Curves() {};
+	~Curves() {};
 	virtual Point3D getPoint3D(double t) const = 0;
 	virtual Point3D firstDerivative(double t) const = 0;
 };
@@ -42,7 +42,8 @@ public:
 			std::cerr << "Radii must be positive\n";
 			throw std::exception();
 		}
-	}
+	};
+	~Circle() {};
 	Point3D getPoint3D(double t) const override;
 	Point3D firstDerivative(double t) const override;
 	double getRadius() const;
@@ -61,7 +62,8 @@ public:
 			std::cerr << "Radii must be positive\n";
 			throw std::exception();
 		}
-	}
+	};
+	~Ellipse() {};
 	Point3D getPoint3D(double t) const override;
 	Point3D firstDerivative(double t) const override;
 private:
@@ -80,7 +82,8 @@ public:
 			std::cerr << "Radii must be positive\n";
 			throw std::exception();
 		}
-	}
+	};
+	~Helixes() {};
 	Point3D getPoint3D(double t) const override;
 	Point3D firstDerivative(double t) const override;
 private:

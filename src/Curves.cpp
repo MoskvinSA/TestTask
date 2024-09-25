@@ -98,9 +98,9 @@ std::vector<std::shared_ptr<Circle>> Utils::getOnlyCircle(std::vector<std::share
 {
 	std::vector<std::shared_ptr<Circle>> curves_circle;
 	for (auto c : curves) {
-		if (typeid(*c) == typeid(Circle)) {
-			curves_circle.push_back(std::dynamic_pointer_cast<Circle>(c));
-		}
+		std::shared_ptr<Circle> circle = std::dynamic_pointer_cast<Circle>(c);
+		if (circle)
+			curves_circle.push_back(circle);
 	}
 	return curves_circle;
 }
