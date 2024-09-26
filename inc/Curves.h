@@ -10,11 +10,13 @@
 #include <algorithm>
 #endif
 
+#define CURVES_EXPORT __declspec(dllexport)
+
 class Point3D
 {
 public:
 	Point3D(double _x, double _y, double _z) : x{ _x }, y{ _y }, z{ _z } {};
-	void print() {
+	__declspec(dllexport) void print() {
 		std::cout << "x = " << x << " y = " << y << " z = " << z << "\n";
 	};
 private:
@@ -28,8 +30,8 @@ class Curves
 public:
 	Curves() {};
 	~Curves() {};
-	virtual Point3D getPoint3D(double t) const = 0;
-	virtual Point3D firstDerivative(double t) const = 0;
+	CURVES_EXPORT virtual Point3D getPoint3D(double t) const = 0;
+	CURVES_EXPORT virtual Point3D firstDerivative(double t) const = 0;
 };
 
 class Circle : public Curves
@@ -44,9 +46,9 @@ public:
 		}
 	};
 	~Circle() {};
-	Point3D getPoint3D(double t) const override;
-	Point3D firstDerivative(double t) const override;
-	double getRadius() const;
+	CURVES_EXPORT Point3D getPoint3D(double t) const override;
+	CURVES_EXPORT Point3D firstDerivative(double t) const override;
+	CURVES_EXPORT double getRadius() const;
 private:
 	double r;
 	double t;
@@ -64,8 +66,8 @@ public:
 		}
 	};
 	~Ellipse() {};
-	Point3D getPoint3D(double t) const override;
-	Point3D firstDerivative(double t) const override;
+	CURVES_EXPORT Point3D getPoint3D(double t) const override;
+	CURVES_EXPORT Point3D firstDerivative(double t) const override;
 private:
 	double a;
 	double b;
@@ -84,8 +86,8 @@ public:
 		}
 	};
 	~Helixes() {};
-	Point3D getPoint3D(double t) const override;
-	Point3D firstDerivative(double t) const override;
+	CURVES_EXPORT Point3D getPoint3D(double t) const override;
+	CURVES_EXPORT Point3D firstDerivative(double t) const override;
 private:
 	double r;
 	double t;
@@ -96,8 +98,8 @@ private:
 class Utils
 {
 public:
-	static std::vector<std::shared_ptr<Curves>> randomCreateCurves(int _size);
-	static void printCurves(std::vector<std::shared_ptr<Curves>> curves, double t);
-	static void printCircle(std::vector<std::shared_ptr<Circle>> curves, double t);
-	static std::vector<std::shared_ptr<Circle>> getOnlyCircle(std::vector<std::shared_ptr<Curves>> curves);
+	CURVES_EXPORT static std::vector<std::shared_ptr<Curves>> randomCreateCurves(int _size);
+	CURVES_EXPORT static void printCurves(std::vector<std::shared_ptr<Curves>> curves, double t);
+	CURVES_EXPORT static void printCircle(std::vector<std::shared_ptr<Circle>> curves, double t);
+	CURVES_EXPORT static std::vector<std::shared_ptr<Circle>> getOnlyCircle(std::vector<std::shared_ptr<Curves>> curves);
 };
