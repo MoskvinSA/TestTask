@@ -1,22 +1,25 @@
-﻿#pragma once
-#define _USE_MATH_DEFINES
+﻿#define _USE_MATH_DEFINES
 #include <iostream>
 #include <string>
 #include <cmath>
 #include <random>
 #include <vector>
-#if ! _WIN32_
+#if ! _WIN32
 #include <memory>
 #include <algorithm>
 #endif
 
+#if _WIN32 || _WIN64
 #define CURVES_EXPORT __declspec(dllexport)
+#else
+#define CURVES_EXPORT
+#endif
 
 class Point3D
 {
 public:
 	Point3D(double _x, double _y, double _z) : x{ _x }, y{ _y }, z{ _z } {};
-	__declspec(dllexport) void print() {
+	CURVES_EXPORT void print() {
 		std::cout << "x = " << x << " y = " << y << " z = " << z << "\n";
 	};
 private:
